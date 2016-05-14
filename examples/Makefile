@@ -1,5 +1,5 @@
 all:
-	gcc -Wall -Wextra ucl_c.c -lucl -o ucl_c
-	gcc -Wall -Wextra ucl_c2.c -lucl -o ucl_c2
+	gcc -Wall -Wextra ucl_iterate.c -lucl -o ucl_iterate
+	gcc -Wall -Wextra ucl_lookup.c -lucl -o ucl_lookup
 clean:
-	rm ucl_c ucl_c2
+	rm ucl_iterate ucl_lookup
