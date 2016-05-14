@@ -74,7 +74,6 @@ main(int argc, char **argv)
 {
 	struct ucl_parser *parser;
 	ucl_object_t *top;
-	int ret = 0, r = 0;
 
 	if (argc != 2) {
 		print_usage("wrong number of arguments");
@@ -98,5 +97,5 @@ main(int argc, char **argv)
 
 	ucl_parser_free(parser);
 
-	return ret;
+	return 0;
 }
