@@ -1,0 +1,7 @@
+name = "Cody Doucette"
+date {
+    year = 1992
+    month = 6
+    day = 29
+}
+arr = [1, 2, 3]
