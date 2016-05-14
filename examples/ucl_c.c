@@ -10,8 +10,8 @@ print_usage(const char *msg)
 void
 iterate(const ucl_object_t *obj)
 {
-	ucl_object_iter_t it = NULL;
-	const ucl_object_t *cur = ucl_iterate_object(obj, &it, true);
+	ucl_object_iter_t it = ucl_object_iterate_new(obj);
+	const ucl_object_t *cur = ucl_object_iterate_safe(it, true);
 	while (cur) {
 		const char *key = ucl_object_key(cur);
 		ucl_type_t type = ucl_object_type(cur);
@@ -28,13 +28,14 @@ iterate(const ucl_object_t *obj)
 			 * recursively calling iterate(), but be aware that
 			 * ucl_object_key() will be null.
 			 */
-			ucl_object_iter_t ait = NULL;
+			ucl_object_iter_t ait = ucl_object_iterate_new(cur);
 			const ucl_object_t *acur;
 			printf("%s : [ ", key);
-			while ((acur = ucl_iterate_object(cur, &ait, true))) {
+			while ((acur = ucl_object_iterate_safe(ait, true))) {
 				printf("%s ", ucl_object_tostring_forced(acur));
 			}
 			printf("]\n");
+			ucl_object_iterate_free(ait);
 			break;
 		}
 		case UCL_INT: {
@@ -63,8 +64,9 @@ iterate(const ucl_object_t *obj)
 			break;
 		}
 
-		cur = ucl_iterate_object(obj, &it, true);
+		cur = ucl_object_iterate_safe(it, true);
 	}
+	ucl_object_iterate_free(it);
 }
 
 int
