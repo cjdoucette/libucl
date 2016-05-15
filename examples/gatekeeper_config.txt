@@ -1,0 +1,32 @@
+/*
+ * Draft configuration file for Gatekeeper. Configures information about paths
+ * to the AS (ASNs, tunnels, transit paths, map to secondary addresses), how the
+ * router can load balance among the Gatekeeper server(s) (using ECMP), and
+ * resource usage in the Gatekeeper server(s) (bookkeeping memory, queues, etc).
+ */
+
+/* AS path configuration. */
+
+# AS numbers that we're announcing.
+asns = [ 1000 ]
+
+# Tunneling protocol back to AS.
+tunneling_proto = "ip-in-ip"
+
+secondary_address_map = [ ["1.2.3.4", "5.6.7.8"] ]
+
+/* Router configuration. */
+
+# ECMP parameters.
+ecmp_interfaces = [ "eth0", "eth1" ]
+ecmp_routes = [ "static route 26.0.0.0/8 next-hop 23.0.54.111" ]
+ecmp_load_balancing_policy = "set policy-options policy-statement load-balancing-policy then load-balance per-packet"
+
+/* Resource configuration. */
+
+# Number of (src_addr, dst_addr, bandwidth, timeout) rule tuples to allow.
+num_rules_permitted = 1M
+
+num_per_dest_red_queues = 10
+per_dest_hash_seed = 782397
+red_queue_parameters = { avg = .5, other = 10 }

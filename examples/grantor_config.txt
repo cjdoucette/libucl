@@ -1,0 +1,18 @@
+/*
+ * Draft configuration file for Grantor. Configures information about the path
+ * back to Gatekeeper and about rules (static firewall rules, default values).
+ */
+
+/* Gatekeeper path configuration. */
+
+tunneling_proto = "ip-in-ip"
+
+/* Rules configuration. */
+
+static_rules = [ ["1.2.3.4", "5.6.7.8", "2Mbps", 10s] ]
+
+default_timeout = 10s
+default_rate = "2Mbps"
+
+notify_gatekeeper_on_rejection = true
+num_decisions_to_aggregate = 5
