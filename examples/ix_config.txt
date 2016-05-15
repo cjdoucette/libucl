@@ -1,7 +1,7 @@
 /*
  * Draft configuration file for the IX. Configures L2 (interface modes,
  * neighbor discovery, MTU, timeouts, ...) and L3 (BGP, IP options, disabling
- * unneeded protocols, etc).
+ * unneeded protocols, peer groups, route maps, etc).
  *
  * Does the IX we're using have a configuration guide? Some examples from
  * AMS-IX (Amsterdam) are below:
