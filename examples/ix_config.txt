@@ -1,0 +1,38 @@
+/*
+ * Draft configuration file for the IX. Configures L2 (interface modes,
+ * neighbor discovery, MTU, timeouts, ...) and L3 (BGP, IP options, disabling
+ * unneeded protocols, etc).
+ *
+ * Does the IX we're using have a configuration guide? Some examples from
+ * AMS-IX (Amsterdam) are below:
+ *  1. https://ams-ix.net/technical/specifications-descriptions/allowed-traffic
+ *  2. https://ams-ix.net/technical/specifications-descriptions/config-guide
+ *
+ * What format should this be in? Options or commands to directly apply?
+ */
+
+/* L2 configuration. */
+
+# According to [2], should be >= 120 minutes, preferably 240.
+arp_cache_timeout = 240min
+use_proxy_arp = false
+
+mtu = 1500
+
+ix_port_spanning_tree = false
+ix_port_l2_keepalive = false
+
+/* L3 and up configuration. */
+
+# BGP configuration.
+ix_port_bgp = true
+
+# Disable all interior routing protocols.
+ix_port_ospf = false
+ix_port_rip = false
+ix_port_is-is = false
+
+# E.g. on Cisco: "no service dhcp"
+ix_port_dhcp = false
+
+use_ip_redirects = false
